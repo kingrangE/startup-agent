@@ -1,0 +1,187 @@
+# 평가 데이터셋 — 좋은/애매한/나쁜 창업 아이디어 고정 세트
+#
+# 두 겹의 라벨:
+#   expected_verdict : 기대 판정 (strong / acceptable / needs_work)
+#                      — Agent 시스템의 overall_verdict와 대조하기 위함
+#   human_scores     : 이 아이디어로 "생성된 캔버스"를 사람이 4차원 1~5점으로 채점
+#                      — judge 점수와 대조하기 위함 (MAE,편향) 미채점은 null
+#
+# 평가 방식:
+#   1) python -m evals generate-canvases  → evals/data/canvases_for_labeling.md 생성
+#   2) 문서를 보고 각 항목의 human_scores를 채운다. 예:
+#        human_scores: {specificity: 4, evidence: 3, coherence: 4, differentiation: 3}
+#
+
+# ──────────────── 명백히 좋은 아이디어 (strong) ────────────────
+
+- id: good-01
+  idea: 만성질환(당뇨·신부전) 반려동물 보호자를 위한 투약·식이 기록 및 수의사 공유 앱
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 구체적 타깃(만성질환 보호자), 명확한 문제(기록 단절), B2B2C 확장 경로
+
+- id: good-02
+  idea: 중소 제조업체의 외국인 근로자를 위한 다국어 산업안전교육 영상 플랫폼
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 법정 의무교육 수요 + 언어 장벽이라는 검증 가능한 문제
+
+- id: good-03
+  idea: 1인 미용실 원장을 위한 노쇼 방지 예약금·리마인드 자동화 서비스
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 노쇼 손실이라는 정량화 가능한 페인포인트, 좁고 명확한 고객군
+
+- id: good-04
+  idea: 재가요양센터를 위한 요양보호사 매칭·근태·돌봄일지 기록 통합 SaaS
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 고령화로 시장 성장, 행정 부담이라는 명확한 문제, B2B 수익 모델
+
+- id: good-05
+  idea: 프리랜서 개발자를 위한 견적·계약·세금계산서 발행 자동화 도구
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 비개발 업무 시간이라는 측정 가능한 문제, 지불 의사 높은 고객군
+
+- id: good-06
+  idea: 캠핑장 실시간 빈자리·취소표 알림 예약 플랫폼
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 성수기 예약 경쟁이라는 검증된 수요, 알림이라는 명확한 솔루션
+
+- id: good-07
+  idea: 치과와 치기공소 간 보철물 주문·제작 현황·배송 추적 B2B 플랫폼
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 팩스·전화 기반 아날로그 산업의 디지털화, 양면 네트워크 효과
+
+- id: good-08
+  idea: 중소 건물 관리소장을 위한 소방·전기 법정점검 일정 관리 및 증빙 자동화 SaaS
+  category: good
+  expected_verdict: strong
+  human_scores: null
+  notes: 법정 의무 + 과태료 리스크라는 강한 동기, 반복 구독 수익
+
+# ──────────────── 애매한 아이디어 (acceptable 기대 — 보강 여지) ────────────────
+
+- id: ambiguous-01
+  idea: 직장인 점심 메뉴 추천 앱
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 문제는 실재하나 지불 의사·차별성 불명확
+
+- id: ambiguous-02
+  idea: 대학생 중고 전공서적 거래 플랫폼
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 수요는 있으나 계절성·낮은 객단가·기존 중고 플랫폼과 경쟁
+
+- id: ambiguous-03
+  idea: 반려식물 관리 알림 및 식물 집사 커뮤니티 앱
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 취미 시장 — 고객군은 있으나 수익화 경로 약함
+
+- id: ambiguous-04
+  idea: AI 기반 일기 감정 분석 및 멘탈케어 리포트 앱
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 트렌드성 있으나 효용 검증·의료 규제 경계 모호
+
+- id: ambiguous-05
+  idea: 동네 이웃 간 산책·러닝 메이트 매칭 서비스
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 콜드스타트 문제, 수익 모델 불명확하나 니치 가능성
+
+- id: ambiguous-06
+  idea: 지역 소상공인 공동 배달망 구축 서비스
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 문제는 명확(수수료 부담)하나 운영 난도·자본 요구 높음
+
+- id: ambiguous-07
+  idea: 시니어 대상 스마트폰·키오스크 사용법 구독형 교육 서비스
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 사회적 수요는 크나 당사자 지불 의사·채널 도달이 관건
+
+- id: ambiguous-08
+  idea: 운동 인증 사진 기반 챌린지 소셜 앱
+  category: ambiguous
+  expected_verdict: acceptable
+  human_scores: null
+  notes: 유사 서비스 다수, 리텐션·차별성 입증 필요
+
+# ──────────────── 명백히 나쁜 아이디어 (needs_work 기대 — 반증 장치) ────────────────
+
+- id: bad-01
+  idea: 모두를 위한 AI 혁신 플랫폼
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 대상·문제·맥락 전무한 추상 슬로건 — strong이 나오면 시스템 실패
+
+- id: bad-02
+  idea: 누구나 쉽게 쓰는 만능 슈퍼앱
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 타깃 없음, 문제 정의 없음, 차별성 없음
+
+- id: bad-03
+  idea: 세상을 바꾸는 메타버스 커뮤니티
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 유행어 조합 — 검증 가능한 가설이 하나도 없음
+
+- id: bad-04
+  idea: 청년을 위한 새로운 SNS
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 포화 시장 + 차별점 부재 + 네트워크 효과 극복 방안 없음
+
+- id: bad-05
+  idea: 모든 가게를 연결하는 O2O 통합 플랫폼
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 범위 무한정 — 고객군·문제 특정 불가
+
+- id: bad-06
+  idea: 빅데이터 기반 맞춤형 라이프스타일 큐레이션 서비스
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 데이터 출처·문제·고객 모두 미정의된 기술 슬로건
+
+- id: bad-07
+  idea: 블록체인으로 신뢰를 혁신하는 중고거래 플랫폼
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 기술이 해결할 문제가 불명확 — 기존 에스크로 대비 우위 없음
+
+- id: bad-08
+  idea: 전 국민이 쓰는 재테크 정보 공유 플랫폼
+  category: bad
+  expected_verdict: needs_work
+  human_scores: null
+  notes: 전 국민 타깃은 타깃이 아님, 수익·규제 리스크 미고려

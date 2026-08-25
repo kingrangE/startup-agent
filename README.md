@@ -33,11 +33,11 @@ SePark는 막연한 창업 아이디어를 9개 블록의 린 캔버스로 정�
 Python 3.10 이상이 필요합니다. 현재 기준선의 의존성을 새 가상환경에 설치하려면 다음 명령을 실행합니다.
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install "PyYAML>=6.0" "pytest>=8.0"
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+python3 -m pip install "PyYAML>=6.0" "pytest>=8.0"
 ```
 
 현재 `requirements.txt`에는 평가 데이터 로딩에 필요한 PyYAML과 테스트 도구가 포함되어 있지 않아 마지막 설치 명령이 필요합니다.
@@ -52,9 +52,9 @@ export OPENAI_MODEL="gpt-4o-mini"  # 선택 사항
 린 캔버스를 터미널에 출력하거나 Markdown으로 저장할 수 있습니다.
 
 ```bash
-python main.py "반려동물 헬스케어"
-python main.py "비건 베이커리" -i "국내 시장 한정" -o canvas.md
-python main.py --help
+python3 main.py "반려동물 헬스케어"
+python3 main.py "비건 베이커리" -i "국내 시장 한정" -o canvas.md
+python3 main.py --help
 ```
 
 이 명령은 실제 OpenAI API를 호출하므로 계정 요금과 모델 접근 권한을 확인해야 합니다. 출력 파일에는 민감한 아이디어나 개인정보가 포함될 수 있으므로 공개 저장소에 그대로 커밋하지 마세요.
@@ -62,10 +62,10 @@ python main.py --help
 ## 테스트
 
 ```bash
-python -m pytest -q
+python3 -m pytest -q
 ```
 
-단위 테스트는 `ScriptedLLMClient`의 고정 응답을 사용하며 외부 API를 호출하지 않습니다. 다만 이 기준선에서는 평가 factory 연결이 아직 완료되지 않아 전체 테스트 수집이 실패합니다. 생성기 이외의 judge factory가 복구된 뒤 전체 테스트가 정상 실행되는 것이 목표입니다.
+단위 테스트는 `ScriptedLLMClient`의 고정 응답을 사용하며 외부 API를 호출하지 않습니다. 전체 테스트를 실행하려면 생성기, judge, pairwise judge의 factory 연결을 모두 포함한 Foundation 변경이 먼저 통합되어야 합니다.
 
 단위 테스트 통과는 실제 모델의 출력 품질을 증명하지 않습니다. API를 호출하는 평가 실험, 사람 라벨, 결과 해석은 [평가 가이드](docs/evaluation.md)에 별도로 설명합니다.
 

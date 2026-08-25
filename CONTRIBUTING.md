@@ -15,11 +15,11 @@ SePark에 기여해 주셔서 감사합니다. 이 저장소는 아직 개발 �
 Python 3.10 이상을 사용합니다.
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python -m pip install "PyYAML>=6.0" "pytest>=8.0"
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
+python3 -m pip install "PyYAML>=6.0" "pytest>=8.0"
 ```
 
 현재 기준선의 `requirements.txt`에는 PyYAML과 pytest가 아직 포함되지 않아 별도 설치가 필요합니다.
@@ -49,11 +49,11 @@ python -m pip install "PyYAML>=6.0" "pytest>=8.0"
 코드 변경은 최소한 다음 검증을 통과해야 합니다.
 
 ```bash
-python -m pytest -q
+python3 -m pytest -q
 git diff --check
 ```
 
-기준선에는 judge factory가 아직 연결되지 않아 전체 테스트 수집이 실패합니다. 관련 복구가 병합되기 전에는 이 실패를 PR에 명시하고, 변경과 직접 관련된 테스트를 별도로 실행합니다. 실패를 숨기기 위해 테스트를 건너뛰거나 삭제하지 않습니다.
+전체 테스트가 judge factory import 오류로 수집되지 않는다면 Foundation의 factory 복구가 빠졌는지 먼저 확인합니다. 관련 복구가 병합되기 전에는 이 실패를 PR에 명시하고, 변경과 직접 관련된 테스트를 별도로 실행합니다. 실패를 숨기기 위해 테스트를 건너뛰거나 삭제하지 않습니다.
 
 문서 변경은 다음도 확인합니다.
 
@@ -69,8 +69,8 @@ git diff --check
 유료 평가를 승인받아 실행할 때는 작은 표본으로 시작합니다.
 
 ```bash
-python -m evals --help
-python -m evals run-verdict-accuracy --limit 1
+python3 -m evals --help
+python3 -m evals run-verdict-accuracy --limit 1
 ```
 
 PR에는 키를 제외하고 다음 정보를 남깁니다.

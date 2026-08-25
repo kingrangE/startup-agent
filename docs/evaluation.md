@@ -2,7 +2,7 @@
 
 이 문서는 SePark의 평가 코드가 무엇을 측정하는지, 단위 테스트와 실제 모델 실험이 어떻게 다른지, 결과를 어떤 한계 안에서 해석해야 하는지를 설명합니다.
 
-> 기준선 상태: 평가 로직과 24개 데이터셋은 구현되어 있지만, 사람 점수와 실제 OpenAI 실행 결과는 아직 없습니다. `run-judge-reliability`, `run-verdict-accuracy`, `run-bias`, `run-pairwise`는 judge factory 연결이 완료되기 전까지 실행되지 않습니다.
+> 기준선 상태: 평가 로직과 24개 데이터셋은 구현되어 있지만, 사람 점수와 실제 OpenAI 실행 결과는 아직 없습니다. 유료 judge 실험은 Foundation의 judge factory 연결이 통합된 뒤 실행할 수 있습니다.
 
 ## 평가 대상
 
@@ -30,7 +30,7 @@
 ### 1. 결정적 단위 테스트
 
 ```bash
-python -m pytest -q
+python3 -m pytest -q
 ```
 
 단위 테스트는 `ScriptedLLMClient`가 반환하는 고정 응답으로 다음 동작을 검증합니다.
@@ -44,11 +44,11 @@ python -m pytest -q
 
 이 테스트는 외부 API를 호출하지 않으며 비용이 발생하지 않습니다. 코드가 정해진 규칙대로 동작한다는 증거일 뿐, 실제 LLM이 좋은 캔버스를 생성하거나 공정하게 평가한다는 증거는 아닙니다.
 
-현재 기준선은 `create_judge`와 `create_pairwise_judge` 연결이 빠져 있어 일부 테스트가 수집 단계에서 실패합니다. factory 복구 후 전체 테스트 통과 여부를 다시 확인해야 합니다.
+전체 테스트가 `create_judge` 또는 `create_pairwise_judge` import 오류로 수집되지 않으면 Foundation의 factory 복구가 빠진 상태입니다. 복구를 통합한 뒤 전체 테스트 통과 여부를 확인해야 합니다.
 
 ### 2. 실제 모델 평가
 
-`python -m evals`의 실험 명령은 OpenAI API를 호출합니다. 모델, 재시도, 캐시 적중 여부에 따라 비용과 시간이 달라지며 단위 테스트에 포함되지 않습니다.
+`python3 -m evals`의 실험 명령은 OpenAI API를 호출합니다. 모델, 재시도, 캐시 적중 여부에 따라 비용과 시간이 달라지며 단위 테스트에 포함되지 않습니다.
 
 실행 전에 다음을 확인합니다.
 
@@ -63,16 +63,16 @@ export OPENAI_API_KEY="your-api-key"
 export OPENAI_MODEL="gpt-4o-mini"
 export JUDGE_MODEL="gpt-4o"
 
-python -m evals --help
-python -m evals generate-canvases --limit 1
-python -m evals run-verdict-accuracy --limit 1
-python -m evals run-judge-reliability --limit 1 --n 2
-python -m evals run-bias --limit 1
-python -m evals run-pairwise --limit 1 --model-a gpt-4o-mini --model-b gpt-4o
-python -m evals list-results
+python3 -m evals --help
+python3 -m evals generate-canvases --limit 1
+python3 -m evals run-verdict-accuracy --limit 1
+python3 -m evals run-judge-reliability --limit 1 --n 2
+python3 -m evals run-bias --limit 1
+python3 -m evals run-pairwise --limit 1 --model-a gpt-4o-mini --model-b gpt-4o
+python3 -m evals list-results
 ```
 
-`generate-canvases`는 현재 생성기 factory만 사용하므로 실행할 수 있습니다. 나머지 judge 실험은 factory 복구 브랜치가 병합된 뒤 실행해야 합니다.
+`generate-canvases`는 생성기 factory만 사용합니다. 나머지 judge 실험에는 Foundation에서 제공하는 judge와 pairwise judge factory가 필요합니다.
 
 ## 실험별 의미와 최소 호출량
 

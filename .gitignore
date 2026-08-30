@@ -1,1 +1,25 @@
-*.pyc
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python environments and bytecode
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Test, benchmark, and coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+benchmark-results/
+
+# Package build artifacts
+build/
+dist/
+*.egg-info/
+
+# Evaluation and analysis caches
+evals/results/_canvas_cache/
+graphify-out/

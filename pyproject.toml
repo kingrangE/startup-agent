@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "separk"
+version = "0.2.0"
+description = "Research-grounded Lean Canvas agent built with LangGraph"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ddgs>=9.0.0",
+    "langgraph>=1.0.0",
+    "openai>=1.40.0",
+    "python-dotenv>=1.0.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2.1",
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+]
+local = [
+    "accelerate>=1.0.0",
+    "sentence-transformers>=3.0.0",
+    "torch>=2.2.0",
+    "transformers>=4.45.0",
+]
+
+[project.scripts]
+separk = "main:main"
+separk-agent = "separk.agent.cli:main"
+separk-evals = "evals.__main__:main"
+
+[tool.setuptools]
+include-package-data = true
+py-modules = ["main"]
+
+[tool.setuptools.packages.find]
+include = ["evals*", "lean_canvas*", "separk*"]
+
+[tool.setuptools.package-data]
+evals = ["data/*.yaml"]
+separk = ["benchmarks/data/*.yaml"]
